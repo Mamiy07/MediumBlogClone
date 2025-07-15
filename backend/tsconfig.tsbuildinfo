@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/middlewares/user_middleware.ts","./src/routes/blog_routes.ts","./src/routes/main_routes.ts","./src/routes/user_routes.ts"],"version":"5.8.3"}
