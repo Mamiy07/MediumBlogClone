@@ -162,9 +162,9 @@ export default function SignupPage() {
 
         <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
           Already have an account?{' '}
-          <p onClick={() => navigate('/signin')} className="font-semibold text-black hover:underline">
+          <span onClick={() => navigate('/signin')} className="font-semibold text-black hover:underline">
             Log in
-          </p>
+          </span>
         </p>
 
       </div>
