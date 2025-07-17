@@ -42,7 +42,7 @@ export default function SignupPage() {
     setSuccessMsg('');
 
     try {
-      const res = await fetch('https://mediumblogclone-1.onrender.com/signup', {
+      const res = await fetch('https://mediumblogclone-1.onrender.com/api/v1/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
