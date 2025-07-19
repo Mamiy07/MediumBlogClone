@@ -34,13 +34,12 @@ router.post("/signup", async (req, res) => {
     if (!parsedData.success) {
         return res.status(400).json({ errors: parsedData.error.flatten().fieldErrors });
     }
-    try {
        const checkUser = await prisma.user.findUnique({
         where: { email: parsedData.data.email }
     });
-} catch (error) {
-    return res.status(400).json({ message: "Error checking user existence" });
-}
+    if (checkUser) {
+        return res.status(400).json({ message: "User already exists" });
+    }
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
     // Handle user signup logic here

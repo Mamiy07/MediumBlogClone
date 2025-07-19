@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import Button from '../components/ui/button';
-import Input from '../components/ui/input';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
 import '../index.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
 
    const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [password, setPassword] = useState('');
    const [error, setError] = useState('');
+    const navigate = useNavigate();
    const handleClick = async () => {
      try {
        const response = await axios.post('https://mediumblogclone-1.onrender.com/api/v1/user/signup', {
@@ -17,9 +19,15 @@ const Signup = () => {
          password,
        });
        console.log('Signup successful:', response.data);
+        setError(''); // Clear error on successful signup
+        await navigate('/blog');
      } catch (error) {
-       console.error('Signup failed:', error);
-       
+        console.error('Error during signup:', error);
+       if (axios.isAxiosError(error) && error.response && error.response.status === 400) {
+         setError("User already exists");
+       } else {
+         setError("Invalid input");
+       } 
      }
    };
 
