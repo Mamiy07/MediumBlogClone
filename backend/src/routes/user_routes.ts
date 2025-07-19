@@ -32,7 +32,7 @@ router.post("/signup", async (req, res) => {
     const parsedData = signupSchema.safeParse({ email, name, password });
 
     if (!parsedData.success) {
-        return res.status(400).json({ errors: parsedData.error.flatten().fieldErrors });
+        return res.status(402).json({ errors: parsedData.error.flatten().fieldErrors });
     }
        const checkUser = await prisma.user.findUnique({
         where: { email: parsedData.data.email }

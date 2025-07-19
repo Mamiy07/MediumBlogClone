@@ -13,7 +13,7 @@ const Signup = () => {
     const navigate = useNavigate();
    const handleClick = async () => {
      try {
-       const response = await axios.post('https://mediumblogclone-1.onrender.com/api/v1/user/signup', {
+       const response = await axios.post('https://mediumblogclone-2.onrender.com/api/v1/user/signup', {
          email,
          name,
          password,
