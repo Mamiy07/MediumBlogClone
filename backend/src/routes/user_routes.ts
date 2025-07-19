@@ -28,12 +28,21 @@ type SigninData = zod.infer<typeof signinSchema>;
 
 router.post("/signup", async (req, res) => {
   const { email,name, password } = req.body;
+
     const parsedData = signupSchema.safeParse({ email, name, password });
+
     if (!parsedData.success) {
         return res.status(400).json({ errors: parsedData.error.flatten().fieldErrors });
     }
-    try{
-         const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+       const checkUser = await prisma.user.findUnique({
+        where: { email: parsedData.data.email }
+    });
+} catch (error) {
+    return res.status(400).json({ message: "Error checking user existence" });
+}
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
     // Handle user signup logic here
     const user: SignupData = await prisma.user.create({
         data: {
